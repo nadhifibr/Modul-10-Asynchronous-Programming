@@ -1,0 +1,3 @@
+## Experiment 1.2: Understanding How It Works
+![Screenshot](image.png)
+Teks yang ditambahkan tepat setelah blok spawner.spawn langsung muncul di terminal tanpa menunggu jeda 2 detik karena fungsi spawn bersifat non-blocking, yang berarti ia hanya mendaftarkan tugas ke dalam antrean executor tanpa menghentikan eksekusi baris kode di bawahnya. Ketika program mencapai baris TimerFuture::new(...).await di dalam blok asinkronus, future tersebut akan melepaskan kontrol thread karena statusnya masih pending, sehingga thread utama langsung mengeksekusi perintah println! berikutnya secara sinkronus sementara timer berjalan di latar belakang. Teks "done!" baru akan muncul setelah durasi timer terpenuhi dan executor mendapatkan sinyal wake() untuk melanjutkan sisa tugas tersebut.

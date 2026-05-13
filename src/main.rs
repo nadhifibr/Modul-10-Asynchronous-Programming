@@ -116,6 +116,7 @@ fn main() {
         println!("Nadhif's Komputer: done!");
     });
 
-    drop(spawner); // Penting agar executor berhenti setelah tugas selesai [cite: 535]
+    println!("Nadhif's Komputer: hey hey!");    
+    drop(spawner);
     executor.run();
 }
